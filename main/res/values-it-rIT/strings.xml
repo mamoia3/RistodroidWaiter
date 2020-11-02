@@ -45,5 +45,8 @@
     <string name="closeOrderTitle">Completa ordine</string>
     <string name="titleNoAddingDishCloseOrder">Ordine inviato!</string>
     <string name="contentNoAddingDishCloseOrder">Non puoi aggiungere altri piatti a questo ordine.</string>
+    <string name="removeDishToOrder">Piatto rimosso dall\'ordine</string>
+    <string name="search">Cerca</string>
+    <string name="NoDishFound">Nessun piatto trovato</string>
 
 </resources>

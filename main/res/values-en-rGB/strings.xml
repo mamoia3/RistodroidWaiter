@@ -44,5 +44,8 @@
     <string name="closeOrderTitle">Close order</string>
     <string name="titleNoAddingDishCloseOrder">Order sent!</string>
     <string name="contentNoAddingDishCloseOrder">You can\'t add other dishes to this order.</string>
+    <string name="removeDishToOrder">Dish removed from order.</string>
+    <string name="search">Search</string>
+    <string name="NoDishFound">No dishes found</string>
 
 </resources>

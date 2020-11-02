@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Waiter</string>
+    <string name="app_name" translatable="false">Ristodroid</string>
 
     <string name="logo" translatable="false">Logo</string>
     <string name="welcome_title">Welcome!</string>
@@ -32,6 +32,7 @@
     <string name="emptySummary">There are no dishes in this order.</string>
     <string name="deleteDishMessage">Are you sure to delete this dish?</string>
     <string name="addDishToOrder">Dish added to order.</string>
+    <string name="removeDishToOrder">Dish removed from order.</string>
     <string name="confirmOrderMessage">Are you sure you want to confirm the order? If you click yes, you will no longer be able to edit it!</string>
     <string name="closeOrderTitle">Close order</string>
     <string name="plusSymbol" translatable="false">+</string>
@@ -39,6 +40,7 @@
     <string name="piece">Pcs</string>
     <string name="titleNoAddingDishCloseOrder">Order sent!</string>
     <string name="contentNoAddingDishCloseOrder">You can\'t add other dishes to this order.</string>
+    <string name="NoDishFound">No dishes found</string>
 
     <!-- SEZIONE NFC  -->
 
@@ -46,6 +48,7 @@
     <string name="hint_your_message">Your message</string>
     <string name="label_your_message">Outgoing NFC message:</string>
     <string name="title_btn_set">Set Message</string>
+    <string name="search">Search</string>
 
 
     <!--
@@ -59,5 +62,7 @@
         <item quantity="one">Allergenic</item>
         <item quantity="other">Allergenics</item>
     </plurals>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

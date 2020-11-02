@@ -13,15 +13,21 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+
 import com.example.waiter.R;
+import com.google.gson.Gson;
+
+import model.Order;
 
 
-public class ReceiverActivity extends AppCompatActivity {
+public class WaiterActivity extends AppCompatActivity {
 
     public static final String MIME_TEXT_PLAIN = "text/plain";
 
     private TextView tvIncomingMessage;
     private NfcAdapter nfcAdapter;
+    private static Order order;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,7 +52,10 @@ public class ReceiverActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        this.tvIncomingMessage = findViewById(R.id.tv_in_message);
+        FragmentManager fm = getSupportFragmentManager();
+        CheckOrderFragment checkOrderFragment = new CheckOrderFragment();
+        fm.beginTransaction().add(R.id.FragmentContainer, checkOrderFragment).commit();
+        //this.tvIncomingMessage = findViewById(R.id.tv_in_message);
     }
 
     @Override
@@ -83,7 +92,10 @@ public class ReceiverActivity extends AppCompatActivity {
             NdefRecord ndefRecord_0 = inNdefRecords[0];
 
             String inMessage = new String(ndefRecord_0.getPayload());
-            this.tvIncomingMessage.setText(inMessage);
+            Gson gson = new Gson();
+            order = gson.fromJson(inMessage, Order.class);
+
+//            this.tvIncomingMessage.setText(inMessage);
         }
     }
 
@@ -127,6 +139,14 @@ public class ReceiverActivity extends AppCompatActivity {
         }
 
         adapter.enableForegroundDispatch(activity, pendingIntent, filters, techList);
+    }
+
+    public static Order getOrder() {
+        return order;
+    }
+
+    public static void setOrder(Order order) {
+        WaiterActivity.order = order;
     }
 
     public void disableForegroundDispatch(final AppCompatActivity activity, NfcAdapter adapter) {

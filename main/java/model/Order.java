@@ -1,0 +1,148 @@
+package model;
+
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.util.Log;
+
+import com.google.gson.Gson;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+public class Order implements Parcelable {
+    private static int COUNT=0;
+    private int id;
+    private String time;
+    private Table table;
+    private Seat seat;
+    private int seatNumber;
+    private boolean confirmed;
+    private List<OrderDetail> orderDetails;
+
+
+
+    public Order(Table table, Seat seat, int seatNumber) {
+        this.id = ++COUNT;
+        this.time = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now());
+        this.table = table;
+        this.seat = seat;
+        this.seatNumber = seatNumber;
+        this.confirmed = false;
+        this.orderDetails = new ArrayList<>();
+    }
+
+    protected Order(Parcel in) {
+        id = in.readInt();
+        time = in.readString();
+        table = in.readParcelable(Table.class.getClassLoader());
+        seat = in.readParcelable(Seat.class.getClassLoader());
+        seatNumber = in.readInt();
+        orderDetails = in.readArrayList(OrderDetail.class.getClassLoader());
+    }
+
+    public boolean isConfirmed() {
+        return confirmed;
+    }
+
+    public void setConfirmed(boolean confirmed) {
+        this.confirmed = confirmed;
+    }
+
+    public static final Creator<Order> CREATOR = new Creator<Order>() {
+        @Override
+        public Order createFromParcel(Parcel in) {
+            return new Order(in);
+        }
+
+        @Override
+        public Order[] newArray(int size) {
+            return new Order[size];
+        }
+    };
+
+    public int getId() {
+        return id;
+    }
+
+    public void setTable(Table table) {
+        this.table = table;
+    }
+
+    public void setSeat(Seat seat) {
+        this.seat = seat;
+    }
+
+    public void setSeatNumber(int seatNumber) {
+        this.seatNumber = seatNumber;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public Table getTable() {
+        return table;
+    }
+
+    public Seat getSeat() {
+        return seat;
+    }
+
+    public int getSeatNumber() {
+        return seatNumber;
+    }
+
+    public List<OrderDetail> getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void addOrderDetail (OrderDetail o) {
+        orderDetails.add(o);
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", time=" + time +
+                ", table=" + table +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Order)) return false;
+        Order order = (Order) o;
+        return id == order.id;
+    }
+
+    public static String convertToJson(Order o)  {
+        Gson gson = new Gson();
+        String order = gson.toJson(o);
+        Log.d("json", order);
+        return order;
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(time);
+        dest.writeValue(table);
+        dest.writeValue(seat);
+        dest.writeInt(seatNumber);
+        dest.writeList(orderDetails);
+    }
+}
