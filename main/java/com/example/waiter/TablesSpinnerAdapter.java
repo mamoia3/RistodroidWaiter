@@ -67,4 +67,5 @@ public class TablesSpinnerAdapter extends ArrayAdapter<Table> {
 
         return label;
     }
+
 }

@@ -67,11 +67,11 @@ public class Seat {
                 RistodroidDBSchema.SeatTable.Cols.PRICE
         };
 
-        Cursor cursor = db.query(RistodroidDBSchema.TableTable.NAME, projection, null,
+        Cursor cursor = db.query(RistodroidDBSchema.SeatTable.NAME, projection, null,
                 null, null, null, null);
 
         while (cursor.moveToNext()) {
-            int id = cursor.getInt(cursor.getColumnIndex(RistodroidDBSchema.CategoryTable.Cols.ID));
+            int id = cursor.getInt(cursor.getColumnIndex(RistodroidDBSchema.SeatTable.Cols.ID));
             String name = cursor.getString(cursor.getColumnIndex(RistodroidDBSchema.SeatTable.Cols.NAME));
             double price = cursor.getDouble(cursor.getColumnIndex(RistodroidDBSchema.SeatTable.Cols.PRICE));
 

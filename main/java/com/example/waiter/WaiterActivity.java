@@ -15,10 +15,20 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.waiter.R;
+
+import com.android.volley.Request;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.TreeMap;
+
 import model.Order;
+import persistence.LoadJson;
 
 
 public class WaiterActivity extends AppCompatActivity {
@@ -33,6 +43,9 @@ public class WaiterActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receiver);
+        String url = "https://www.sabersolutions.it/ristodroid/get.php";
+
+        getJsonResponse(url);
 
         if (!isNfcSupported()) {
             Toast.makeText(this, "Nfc is not supported on this device", Toast.LENGTH_SHORT).show();
@@ -151,5 +164,45 @@ public class WaiterActivity extends AppCompatActivity {
 
     public void disableForegroundDispatch(final AppCompatActivity activity, NfcAdapter adapter) {
         adapter.disableForegroundDispatch(activity);
+    }
+
+    /**
+     * Procedura per il caricamento del json nel db
+     * @param url indirizzo per la richiesta GET
+     */
+    private void getJsonResponse(String url) {
+        JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
+            try {
+                JSONObject jsonDb = response.getJSONObject("db");
+                TreeMap<String, JSONArray> tables = getDbTablesFromJson(jsonDb);
+                LoadJson.insertJsonIntoDb(tables, getApplicationContext());
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }, error -> {
+            Toast toast= Toast.makeText(getApplicationContext(),"Sincronizzazione menu fallita," +
+                    " verrà visualizzato l'ultimo menu disponibile",Toast.LENGTH_LONG);
+            toast.show();
+        });
+
+        Volley.newRequestQueue(this).add(jsonRequest);
+    }
+
+    /**
+     * Ritorna una mappa chiave (nome tabella) valore (row della rispettiva tabella) del db
+     * @param db database
+     * @return tables
+     * @throws JSONException json exception
+     */
+    private TreeMap<String, JSONArray> getDbTablesFromJson(JSONObject db) throws JSONException {
+        TreeMap<String, JSONArray> tables = new TreeMap<>();
+        JSONArray keys = db.names();
+        for(int i=0; i< db.length(); i++) {
+            if (keys != null) {
+                tables.put(keys.getString(i) ,db.getJSONArray(keys.getString(i)));
+            }
+        }
+        return tables;
     }
 }

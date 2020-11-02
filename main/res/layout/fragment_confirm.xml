@@ -7,19 +7,7 @@
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     tools:context=".ConfirmFragment">
 
-    <com.github.clans.fab.FloatingActionButton
-        android:id="@+id/confirm_floating_Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:src="@drawable/check_bold"
-        fab:fab_colorNormal="@color/accent"
-        fab:fab_colorPressed="@color/accent"
-        fab:fab_colorRipple="@color/accent"
-        waiter:layout_constraintBottom_toBottomOf="parent"
-        waiter:layout_constraintEnd_toEndOf="parent" />
+
 
     <Spinner
         android:id="@+id/tables_spinner"
@@ -38,4 +26,18 @@
         waiter:layout_constraintStart_toStartOf="parent"
         waiter:layout_constraintTop_toTopOf="parent" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/confirm_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        android:contentDescription="@string/button_add_dish"
+        android:src="@drawable/check_bold"
+        waiter:backgroundTint="@color/accent"
+        waiter:layout_constraintBottom_toBottomOf="parent"
+        waiter:layout_constraintEnd_toEndOf="parent"
+        waiter:tint="@color/icons" />
 </androidx.constraintlayout.widget.ConstraintLayout>

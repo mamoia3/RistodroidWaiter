@@ -12,15 +12,15 @@ import persistence.RistodroidDBSchema;
 import persistence.SqLiteDb;
 
 public class Table {
-    private int id;
+    private String id;
     private List<Order> orderList;
 
-    public Table(int id, List<Order> orderList) {
+    public Table(String id, List<Order> orderList) {
         this.id = id;
         this.orderList = orderList;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -53,7 +53,7 @@ public class Table {
                 null, null, null, null);
 
         while (cursor.moveToNext()) {
-            int id = cursor.getInt(cursor.getColumnIndex(RistodroidDBSchema.CategoryTable.Cols.ID));
+            String id = cursor.getString(cursor.getColumnIndex(RistodroidDBSchema.CategoryTable.Cols.ID));
             tables.add(new Table(id, null));
         }
 

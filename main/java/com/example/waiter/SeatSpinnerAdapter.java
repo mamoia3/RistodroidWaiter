@@ -49,7 +49,7 @@ public class SeatSpinnerAdapter extends ArrayAdapter<Seat> {
         label.setTextColor(ContextCompat.getColor(context, R.color.secondary_text));
         // Then you can get the current item using the values array (Users array) and the current position
         // You can NOW reference each method you has created in your bean object (User class)
-        label.setText(seats.get(position).getId());
+        label.setText(seats.get(position).getName());
 
         // And finally return your dynamic (or custom) view for each spinner item
         return label;
@@ -62,7 +62,7 @@ public class SeatSpinnerAdapter extends ArrayAdapter<Seat> {
                                 ViewGroup parent) {
         TextView label = (TextView) super.getDropDownView(position, convertView, parent);
         label.setTextColor(Color.BLACK);
-        label.setText(seats.get(position).getId());
+        label.setText(seats.get(position).getName());
 
         return label;
     }

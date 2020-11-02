@@ -8,12 +8,14 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.github.clans.fab.FloatingActionButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
@@ -110,16 +112,16 @@ public class CheckOrderFragment extends Fragment {
                 }
             });
 
-            checkOrderButton.setOnClickListener(v->{
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                fm.beginTransaction().replace(R.id.FragmentContainer, new ConfirmFragment()).commit();
-            });
-
         }else {
             emptySummary.setText(R.string.emptySummary);
         }
 
 
+        checkOrderButton.setOnClickListener(v->{
+            Toast.makeText(getContext(), "ciao", Toast.LENGTH_LONG).show();
+            FragmentManager fm = getActivity().getSupportFragmentManager();
+            fm.beginTransaction().replace(R.id.FragmentContainer, new ConfirmFragment()).commit();
+        });
 
         return root;
     }
