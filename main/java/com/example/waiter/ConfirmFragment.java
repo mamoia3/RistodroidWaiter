@@ -3,6 +3,7 @@ package com.example.waiter;
 import android.app.AlertDialog;
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -11,7 +12,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
+import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import model.Seat;
@@ -20,11 +25,18 @@ import model.Table;
 
 public class ConfirmFragment extends Fragment {
 
-    Spinner tableSpinner;
-    Spinner seatSpinner;
+    private Spinner tableSpinner;
+    private Spinner seatSpinner;
+    private Table selectedTable;
+    private Seat selectedSeat;
+    private NumberPicker seatsNumber;
+    private FloatingActionButton confirmButton;
+    private TextView labelTable;
+    private TextView labelSeatType;
+    private TextView labelSeatNumber;
 
-    Table selectedTable;
-    Seat selectedSeat;
+
+
 
     public ConfirmFragment() {
         // Required empty public constructor
@@ -42,10 +54,15 @@ public class ConfirmFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_confirm, container, false);
+        labelSeatNumber = root.findViewById(R.id.titleSeatsNumber);
+        labelSeatType = root.findViewById(R.id.titleSeatsType);
+        labelTable = root.findViewById(R.id.titleTable);
+        labelTable = root.findViewById(R.id.titleTable);
 
         tableSpinner(root);
         seatSpinner(root);
-
+        seatNumberPicker(root);
+        confirm(root);
 
         return root;
     }
@@ -60,11 +77,13 @@ public class ConfirmFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedSeat = seatAdapter.getItem(position);
+                WaiterActivity.getOrder().setSeat(selectedSeat);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 selectedSeat = null;
+                WaiterActivity.getOrder().setSeat(null);
             }
         });
     }
@@ -79,36 +98,66 @@ public class ConfirmFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedTable = tablesAdapter.getItem(position);
+                WaiterActivity.getOrder().setTable(selectedTable);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 selectedTable = null;
+                WaiterActivity.getOrder().setTable(null);
             }
         });
     }
 
-
-    private void numberDickerDialog() {
-        NumberPicker numberPicker = new NumberPicker(getContext());
-        numberPicker.setMaxValue(50);
-        numberPicker.setMinValue(1);
-        numberPicker.setWrapSelectorWheel(true);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext()).setView(numberPicker);
-        builder.setTitle(R.string.enterQuantityDish);
-
-        builder.setPositiveButton(R.string.ok, (dialog, which) -> {
-            // WaiterActivity.getOrder().setQuantity(numberPicker.getValue());
-
+    private void seatNumberPicker(View root) {
+        seatsNumber = root.findViewById(R.id.seatsNumber);
+        seatsNumber.setMaxValue(50);
+        seatsNumber.setMinValue(1);
+        seatsNumber.setWrapSelectorWheel(true);
+        seatsNumber.setOnValueChangedListener((picker, oldVal, newVal) -> {
+            WaiterActivity.getOrder().setSeatNumber(newVal);
         });
-
-        builder.setNegativeButton(R.string.cancel, (dialog, which) -> {
-
-        });
-        builder.show();
     }
 
+    private void confirm(View root) {
+        confirmButton = root.findViewById(R.id.confirm_button);
+        confirmButton.setOnClickListener(v -> {
+            boolean isAllSetted = WaiterActivity.getOrder().getSeat() != null &&
+                    WaiterActivity.getOrder().getTable() != null &&
+                    (Integer) WaiterActivity.getOrder().getSeatNumber() != null;
+            if (isAllSetted) {
 
+            } else {
+                ArrayList<String> unselectedFields = checkSelected();
+                String fields = Utility.listToStringWithDelimiter(unselectedFields, ", ");
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle(R.string.titleConfirmError);
+                builder.setMessage(getResources().getQuantityString(
+                        R.plurals.numberOfFields, unselectedFields.size()) + " " + fields + " " +
+                        getResources().getQuantityString(R.plurals.compilated, unselectedFields.size()));
+
+                builder.setPositiveButton(R.string.ok, (dialog, which) -> {
+
+                });
+
+                builder.show();
+            }
+        });
+    }
+
+    private ArrayList<String> checkSelected() {
+        ArrayList<String> fields = new ArrayList<>();
+
+        if (WaiterActivity.getOrder().getSeat() == null) {
+            fields.add(getResources().getString(R.string.seatType));
+        }
+        if (WaiterActivity.getOrder().getTable() == null) {
+            fields.add(getResources().getString(R.string.tableNumber));
+        }
+        if ((Integer) WaiterActivity.getOrder().getSeatNumber() == null) {
+            fields.add(getResources().getString(R.string.seatNumber));
+        }
+        return fields;
+    }
 
 }

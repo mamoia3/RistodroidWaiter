@@ -21,18 +21,7 @@
     <string name="confirmOrderMessage">Sei sicuro di voler confermare l\'ordine? Se clicchi si, non potrai più modificarlo!</string>
 
 
-    <!--
-    SEZIONE DEDICATA ALLA DEFINIZIONE DEI PLURALI
-    -->
-    <plurals name="numberOfIngredients">
-        <item quantity="one">Ingrediente</item>
-        <item quantity="other">Ingredienti</item>
-    </plurals>
 
-    <plurals name="numberOfAllergenic">
-        <item quantity="one">Allergene</item>
-        <item quantity="other">Allergeni</item>
-    </plurals>
     <string name="titleFailedConnectionDB">Attenzione</string>
     <string name="messageFailedConnectionDB">Impossibile connettersi al database. Useremo l\'ultima versione di menu disponibile.</string>
     <string name="emptyCategory">Non ci sono piatti in questa categoria.</string>
@@ -58,5 +47,30 @@
     <string name="title_btn_set">Imposta Messaggio</string>
     <string name="nfc_disabled">"NFC disabilitato su questo dispositivo. Abilitalo per continuare. "</string>
     <string name="nfc_not_supported">NFC non è supportato su questo dispositivo</string>
+    <string name="titleConfirmError">Errore!</string>
+    <string name="seatNumber">numero di coperti</string>
+    <string name="seatType">tipo di coperto</string>
+    <string name="tableNumber">numero del tavolo</string>
+
+    <!--
+    SEZIONE DEDICATA ALLA DEFINIZIONE DEI PLURALI
+-->
+    <plurals name="numberOfIngredients">
+        <item quantity="one">Ingrediente</item>
+        <item quantity="other">Ingredienti</item>
+    </plurals>
+
+    <plurals name="numberOfAllergenic">
+        <item quantity="one">Allergene</item>
+        <item quantity="other">Allergeni</item>
+    </plurals>
+    <plurals name="numberOfFields">
+        <item quantity="one">Il campo </item>
+        <item quantity="other">I campi </item>
+    </plurals>
+    <plurals name="compilated">
+        <item quantity="one"> non è stato compilato.</item>
+        <item quantity="other"> non sono stati compilati.</item>
+    </plurals>
 
 </resources>

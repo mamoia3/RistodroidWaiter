@@ -1,30 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:waiter="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:waiter="http://schemas.android.com/apk/res-auto"
-    xmlns:fab="http://schemas.android.com/apk/res-auto"
-    tools:context=".ConfirmFragment">
-
+    tools:context=".ConfirmFragment"
+    >
 
 
     <Spinner
         android:id="@+id/tables_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        waiter:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="90dp"
+        android:textAlignment="center"
+        android:spinnerMode="dialog"
         waiter:layout_constraintEnd_toEndOf="parent"
         waiter:layout_constraintStart_toStartOf="parent"
-        waiter:layout_constraintTop_toTopOf="parent" />
+        waiter:layout_constraintTop_toBottomOf="@+id/titleTable" />
 
     <Spinner
         android:id="@+id/seats_spinner"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="90dp"
+        android:spinnerMode="dialog"
+        android:textAlignment="center"
         waiter:layout_constraintEnd_toEndOf="parent"
         waiter:layout_constraintStart_toStartOf="parent"
-        waiter:layout_constraintTop_toTopOf="parent" />
+        waiter:layout_constraintTop_toBottomOf="@+id/titleSeatsType" />
+
+    <NumberPicker
+        android:id="@+id/seatsNumber"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        waiter:layout_constraintEnd_toEndOf="parent"
+        waiter:layout_constraintStart_toStartOf="parent"
+        waiter:layout_constraintTop_toBottomOf="@+id/titleSeatsNumber" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/confirm_button"
@@ -33,11 +50,51 @@
         android:layout_gravity="end|bottom"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+
         android:clickable="true"
         android:contentDescription="@string/button_add_dish"
+
         android:src="@drawable/check_bold"
         waiter:backgroundTint="@color/accent"
         waiter:layout_constraintBottom_toBottomOf="parent"
         waiter:layout_constraintEnd_toEndOf="parent"
         waiter:tint="@color/icons" />
+
+    <TextView
+        android:id="@+id/titleSeatsNumber"
+        style="@style/dishTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:text="@string/seatNumber"
+        android:visibility="visible"
+        waiter:layout_constraintEnd_toEndOf="parent"
+        waiter:layout_constraintStart_toStartOf="parent"
+        waiter:layout_constraintTop_toBottomOf="@+id/seats_spinner" />
+
+    <TextView
+        android:id="@+id/titleSeatsType"
+        style="@style/dishTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:text="@string/seatType"
+        android:visibility="visible"
+        waiter:layout_constraintEnd_toEndOf="parent"
+        waiter:layout_constraintStart_toStartOf="parent"
+        waiter:layout_constraintTop_toBottomOf="@+id/tables_spinner" />
+
+    <TextView
+        android:id="@+id/titleTable"
+        style="@style/dishTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:text="@string/tableNumber"
+        android:visibility="visible"
+        waiter:layout_constraintEnd_toEndOf="parent"
+        waiter:layout_constraintStart_toStartOf="parent"
+        waiter:layout_constraintTop_toTopOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -45,6 +45,10 @@
     <string name="OrderDataRequestFailed">Error! Unable to connect to server.</string>
     <string name="receiptAvailable">Receipt not available.</string>
     <string name="total">TOTAL</string>
+    <string name="titleConfirmError">Error!</string>
+    <string name="seatNumber">number of seats</string>
+    <string name="seatType">type of seat</string>
+    <string name="tableNumber">number of table</string>
 
 
     <!-- SEZIONE NFC  -->
@@ -68,6 +72,15 @@
     <plurals name="numberOfAllergenic">
         <item quantity="one">Allergenic</item>
         <item quantity="other">Allergenics</item>
+    </plurals>
+    <plurals name="numberOfFields">
+        <item quantity="one">Field </item>
+        <item quantity="other">Fields </item>
+    </plurals>
+
+    <plurals name="compilated">
+        <item quantity="one"> is not compilated.</item>
+        <item quantity="other"> are not compilated.</item>
     </plurals>
 
 </resources>

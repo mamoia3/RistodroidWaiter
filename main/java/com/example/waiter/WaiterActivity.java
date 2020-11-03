@@ -37,7 +37,7 @@ public class WaiterActivity extends AppCompatActivity {
 
     private TextView tvIncomingMessage;
     private NfcAdapter nfcAdapter;
-    private static Order order;
+    private static Order order = new Order(null, null, 0);
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
