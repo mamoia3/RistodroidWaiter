@@ -11,10 +11,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 public class Order implements Parcelable {
-    private static int COUNT=0;
-    private int id;
+    private String id;
     private String time;
     private Table table;
     private Seat seat;
@@ -25,7 +25,7 @@ public class Order implements Parcelable {
 
 
     public Order(Table table, Seat seat, int seatNumber) {
-        this.id = ++COUNT;
+        this.id = UUID.randomUUID().toString();
         this.time = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now());
         this.table = table;
         this.seat = seat;
@@ -35,7 +35,7 @@ public class Order implements Parcelable {
     }
 
     protected Order(Parcel in) {
-        id = in.readInt();
+        id = in.readString();
         time = in.readString();
         table = in.readParcelable(Table.class.getClassLoader());
         seat = in.readParcelable(Seat.class.getClassLoader());
@@ -63,7 +63,7 @@ public class Order implements Parcelable {
         }
     };
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -138,7 +138,7 @@ public class Order implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
+        dest.writeString(id);
         dest.writeString(time);
         dest.writeValue(table);
         dest.writeValue(seat);

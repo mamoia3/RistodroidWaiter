@@ -48,5 +48,15 @@
     <string name="removeDishToOrder">Piatto rimosso dall\'ordine</string>
     <string name="search">Cerca</string>
     <string name="NoDishFound">Nessun piatto trovato</string>
+    <string name="SyncFailed">Sincronizzazione fallita, verrà visualizzato l\'ultimo menu disponibile</string>
+    <string name="OrderDataRequestFailed">Errore! Impossibile stabilire una connessione al server.</string>
+    <string name="receiptAvailable">Conto non disponibile.</string>
+    <string name="total">TOTALE</string>
+    <string name="message_beaming_complete">Trasferimento completato</string>
+    <string name="hint_your_message">Il tuo messaggio</string>
+    <string name="label_your_message">Messaggio NFC in uscita</string>
+    <string name="title_btn_set">Imposta Messaggio</string>
+    <string name="nfc_disabled">"NFC disabilitato su questo dispositivo. Abilitalo per continuare. "</string>
+    <string name="nfc_not_supported">NFC non è supportato su questo dispositivo</string>
 
 </resources>

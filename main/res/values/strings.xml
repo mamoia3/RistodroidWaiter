@@ -41,6 +41,11 @@
     <string name="titleNoAddingDishCloseOrder">Order sent!</string>
     <string name="contentNoAddingDishCloseOrder">You can\'t add other dishes to this order.</string>
     <string name="NoDishFound">No dishes found</string>
+    <string name="SyncFailed">Synchronization failed, the last available menu will be displayed</string>
+    <string name="OrderDataRequestFailed">Error! Unable to connect to server.</string>
+    <string name="receiptAvailable">Receipt not available.</string>
+    <string name="total">TOTAL</string>
+
 
     <!-- SEZIONE NFC  -->
 
@@ -49,6 +54,8 @@
     <string name="label_your_message">Outgoing NFC message:</string>
     <string name="title_btn_set">Set Message</string>
     <string name="search">Search</string>
+    <string name="nfc_disabled">NFC disabled on this device. Turn on to proceed</string>
+    <string name="nfc_not_supported">NFC is not supported on this device</string>
 
 
     <!--
@@ -62,7 +69,5 @@
         <item quantity="one">Allergenic</item>
         <item quantity="other">Allergenics</item>
     </plurals>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

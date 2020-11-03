@@ -3,11 +3,12 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 public class OrderDetail {
     private static int COUNT = 0;
     private int id;
-    private int order;
+    private String order;
     private Dish dish;
     private int quantity;
     private List<Variation> variationPlusList;
@@ -19,7 +20,7 @@ public class OrderDetail {
 
     public OrderDetail(int order, Dish dish, int quantity) {
         this.id = ++COUNT;
-        this.order = order;
+        this.order = UUID.randomUUID().toString();
         this.dish = dish;
         this.quantity = quantity;
         this.variationPlusList = new ArrayList<>();
@@ -38,7 +39,7 @@ public class OrderDetail {
         return id;
     }
 
-    public int getOrder() {
+    public String getOrder() {
         return order;
     }
 
@@ -98,4 +99,18 @@ public class OrderDetail {
         }
         return total;
     }
+
+    public static double getTotalReceipt (List<OrderDetail> list){
+        double total = 0;
+
+        for(int i = 0; i < list.size(); i++){
+
+            double priceItem = list.get(i).quantity * (
+                    list.get(i).getDish().getPrice() + getTotalPriceVariation(list.get(i)));
+
+            total = total + priceItem;
+        }
+        return total;
+    }
+
 }

@@ -48,11 +48,11 @@ public class WaiterActivity extends AppCompatActivity {
         getJsonResponse(url);
 
         if (!isNfcSupported()) {
-            Toast.makeText(this, "Nfc is not supported on this device", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.nfc_not_supported, Toast.LENGTH_SHORT).show();
             finish();
         }
         if (!nfcAdapter.isEnabled()) {
-            Toast.makeText(this, "NFC disabled on this device. Turn on to proceed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.nfc_disabled, Toast.LENGTH_SHORT).show();
         }
 
         initViews();
@@ -181,8 +181,7 @@ public class WaiterActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }, error -> {
-            Toast toast= Toast.makeText(getApplicationContext(),"Sincronizzazione menu fallita," +
-                    " verrà visualizzato l'ultimo menu disponibile",Toast.LENGTH_LONG);
+            Toast toast= Toast.makeText(getApplicationContext(),R.string.SyncFailed,Toast.LENGTH_LONG);
             toast.show();
         });
 
