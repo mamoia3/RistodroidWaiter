@@ -35,6 +35,14 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
+    <style name="confirmText" parent="Widget.AppCompat.TextView">
+        <item name="android:font">@font/open_sans_semibold</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@color/primary_text</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
     <style name="titleDetails" parent="Widget.AppCompat.TextView">
         <item name="android:font">@font/open_sans_semibold</item>
         <item name="android:textSize">20dp</item>
