@@ -34,6 +34,10 @@ public class Order implements Parcelable {
         this.orderDetails = new ArrayList<>();
     }
 
+    public void setOrderDetails(List<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
+    }
+
     protected Order(Parcel in) {
         id = in.readString();
         time = in.readString();

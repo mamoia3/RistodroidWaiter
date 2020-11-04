@@ -2,25 +2,34 @@ package com.example.waiter;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
-
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
-import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+
+import com.android.volley.Request;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Dish;
+import model.Order;
+import model.OrderDetail;
 import model.Seat;
 import model.Table;
+import model.Variation;
 
 
 public class ConfirmFragment extends Fragment {
@@ -31,11 +40,6 @@ public class ConfirmFragment extends Fragment {
     private Seat selectedSeat;
     private NumberPicker seatsNumber;
     private FloatingActionButton confirmButton;
-    private TextView labelTable;
-    private TextView labelSeatType;
-    private TextView labelSeatNumber;
-
-
 
 
     public ConfirmFragment() {
@@ -54,10 +58,7 @@ public class ConfirmFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_confirm, container, false);
-        labelSeatNumber = root.findViewById(R.id.titleSeatsNumber);
-        labelSeatType = root.findViewById(R.id.titleSeatsType);
-        labelTable = root.findViewById(R.id.titleTable);
-        labelTable = root.findViewById(R.id.titleTable);
+
 
         tableSpinner(root);
         seatSpinner(root);
@@ -114,9 +115,8 @@ public class ConfirmFragment extends Fragment {
         seatsNumber.setMaxValue(50);
         seatsNumber.setMinValue(1);
         seatsNumber.setWrapSelectorWheel(true);
-        seatsNumber.setOnValueChangedListener((picker, oldVal, newVal) -> {
-            WaiterActivity.getOrder().setSeatNumber(newVal);
-        });
+        seatsNumber.setOnValueChangedListener((picker, oldVal, newVal) ->
+                WaiterActivity.getOrder().setSeatNumber(newVal));
     }
 
     private void confirm(View root) {
@@ -126,7 +126,12 @@ public class ConfirmFragment extends Fragment {
                     WaiterActivity.getOrder().getTable() != null &&
                     (Integer) WaiterActivity.getOrder().getSeatNumber() != null;
             if (isAllSetted) {
-
+                String url ="https://www.sabersolutions.it/insertOrder.php";
+                try {
+                    insertOrderIntoDb(url);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             } else {
                 ArrayList<String> unselectedFields = checkSelected();
                 String fields = Utility.listToStringWithDelimiter(unselectedFields, ", ");
@@ -144,6 +149,24 @@ public class ConfirmFragment extends Fragment {
             }
         });
     }
+
+    private void insertOrderIntoDb(String url) throws JSONException {
+        ArrayList<OrderDetail> details = new ArrayList<>();
+        ArrayList<Variation> var = new ArrayList<>();
+        var.add(new Variation(1, "pizzella", 0.5, null, null));
+        details.add(new OrderDetail(WaiterActivity.getOrder().getId(), new Dish(1, "pizza", "ciao", 2.5, null, null,null,null)));
+        details.get(0).setVariationPlusList(var);
+        WaiterActivity.getOrder().setOrderDetails(details);
+        String order = Order.convertToJson(WaiterActivity.getOrder());
+        JSONObject jsonOrder = new JSONObject(order);
+
+        JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, jsonOrder,
+                response -> Toast.makeText(getContext(),R.string.confirm,Toast.LENGTH_LONG).show(),
+                error -> Toast.makeText(getContext(),R.string.messageFailedConnectionDB,Toast.LENGTH_LONG).show());
+
+        Volley.newRequestQueue(getContext()).add(jsonRequest);
+    }
+
 
     private ArrayList<String> checkSelected() {
         ArrayList<String> fields = new ArrayList<>();

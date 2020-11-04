@@ -6,8 +6,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class OrderDetail {
-    private static int COUNT = 0;
-    private int id;
+    private String id;
     private String order;
     private Dish dish;
     private int quantity;
@@ -18,11 +17,11 @@ public class OrderDetail {
         this.quantity = quantity;
     }
 
-    public OrderDetail(int order, Dish dish, int quantity) {
-        this.id = ++COUNT;
-        this.order = UUID.randomUUID().toString();
+    public OrderDetail(String order, Dish dish) {
+        this.id = UUID.randomUUID().toString();;
+        this.order = order;
         this.dish = dish;
-        this.quantity = quantity;
+        this.quantity = 0;
         this.variationPlusList = new ArrayList<>();
         this.variationMinusList = new ArrayList<>();
     }
@@ -35,7 +34,7 @@ public class OrderDetail {
         this.variationMinusList = variationMinusList;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
