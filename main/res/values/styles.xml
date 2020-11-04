@@ -35,6 +35,14 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
+    <style name="confirmText" parent="Widget.AppCompat.TextView">
+        <item name="android:font">@font/open_sans_semibold</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@color/primary_text</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
     <style name="titleDetails" parent="Widget.AppCompat.TextView">
         <item name="android:font">@font/open_sans_semibold</item>
         <item name="android:textSize">20dp</item>
@@ -53,5 +61,20 @@
         <item name="android:background">@color/button_bg</item>
         <item name="android:textColor">@color/button_text</item>
     </style>
+
+    <!-- NumberPicker (Waiter) style -->
+    <style name="AppTheme.NumberPicker">
+        <item name="colorControlNormal">@color/accent</item>
+    </style>
+
+    <!-- Spinner (Waiter) style -->
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:paddingVertical">3dp</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
+
+
+
 
 </resources>
