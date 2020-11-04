@@ -72,5 +72,6 @@
         <item quantity="one"> non è stato compilato.</item>
         <item quantity="other"> non sono stati compilati.</item>
     </plurals>
+    <string name="app_name">Cameriere</string>
 
 </resources>

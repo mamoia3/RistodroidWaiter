@@ -39,7 +39,7 @@ public class WaiterActivity extends AppCompatActivity {
 
     private TextView tvIncomingMessage;
     private NfcAdapter nfcAdapter;
-    private static Order order = new Order(new Table("1A", null), new Seat(1, "coperto pranzo", 2.0), 5);
+    private static Order order;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

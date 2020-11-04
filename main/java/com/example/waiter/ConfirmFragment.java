@@ -126,7 +126,7 @@ public class ConfirmFragment extends Fragment {
                     WaiterActivity.getOrder().getTable() != null &&
                     (Integer) WaiterActivity.getOrder().getSeatNumber() != null;
             if (isAllSetted) {
-                String url ="https://www.sabersolutions.it/insertOrder.php";
+                String url ="https://www.sabersolutions.it/ristodroid/insertOrder.php";
                 try {
                     insertOrderIntoDb(url);
                 } catch (JSONException e) {
@@ -151,12 +151,6 @@ public class ConfirmFragment extends Fragment {
     }
 
     private void insertOrderIntoDb(String url) throws JSONException {
-        ArrayList<OrderDetail> details = new ArrayList<>();
-        ArrayList<Variation> var = new ArrayList<>();
-        var.add(new Variation(1, "pizzella", 0.5, null, null));
-        details.add(new OrderDetail(WaiterActivity.getOrder().getId(), new Dish(1, "pizza", "ciao", 2.5, null, null,null,null)));
-        details.get(0).setVariationPlusList(var);
-        WaiterActivity.getOrder().setOrderDetails(details);
         String order = Order.convertToJson(WaiterActivity.getOrder());
         JSONObject jsonOrder = new JSONObject(order);
 

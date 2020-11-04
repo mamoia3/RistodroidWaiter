@@ -70,5 +70,6 @@
         <item quantity="one"> is not compilated.</item>
         <item quantity="other"> are not compilated.</item>
     </plurals>
+    <string name="app_name">Waiter</string>
 
 </resources>

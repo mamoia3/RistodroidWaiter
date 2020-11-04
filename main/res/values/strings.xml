@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Ristodroid</string>
+    <string name="app_name">Waiter</string>
 
     <string name="logo" translatable="false">Logo</string>
     <string name="welcome_title">Welcome!</string>
