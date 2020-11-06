@@ -45,7 +45,7 @@
     <string name="hint_your_message">Il tuo messaggio</string>
     <string name="label_your_message">Messaggio NFC in uscita</string>
     <string name="title_btn_set">Imposta Messaggio</string>
-    <string name="nfc_disabled">"NFC disabilitato su questo dispositivo. Abilitalo per continuare. "</string>
+    <string name="nfc_disabled">NFC disabilitato su questo dispositivo. Abilitalo per continuare.</string>
     <string name="nfc_not_supported">NFC non è supportato su questo dispositivo</string>
     <string name="titleConfirmError">Errore!</string>
     <string name="seatNumber">numero di coperti</string>
@@ -73,5 +73,6 @@
         <item quantity="other"> non sono stati compilati.</item>
     </plurals>
     <string name="app_name">Cameriere</string>
+    <string name="label_wait_receive_message">In attesa di ricevere un nuovo ordine...</string>
 
 </resources>

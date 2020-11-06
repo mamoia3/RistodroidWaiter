@@ -1,5 +1,6 @@
 package com.example.waiter;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -24,16 +25,12 @@ import model.OrderDetail;
 
 
 public class CheckOrderFragment extends Fragment {
-
-    private TextView emptySummary;
     private FloatingActionButton checkOrderButton;
 
 
     public CheckOrderFragment() {
         // Required empty public constructor
     }
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,19 +44,15 @@ public class CheckOrderFragment extends Fragment {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_check_order, container, false);
 
-        boolean orderNotEmpty = WaiterActivity.getOrder()!=null && WaiterActivity.getOrder().getOrderDetails().size()>0;
-
-        emptySummary = root.findViewById(R.id.text_empty_summary);
+       boolean orderNotEmpty = ListOrderDetailActivity.getOrder()!=null && ListOrderDetailActivity.getOrder().getOrderDetails().size()>0;
         checkOrderButton = root.findViewById(R.id.check_order_floating_button);
 
 
         if(orderNotEmpty){
-            emptySummary.setVisibility(View.GONE);
-
 
             RecyclerView checkOrderRecyclerView = root.findViewById(R.id.summary_recycler_view);
 
-            List<OrderDetail> details = WaiterActivity.getOrder().getOrderDetails();
+            List<OrderDetail> details = ListOrderDetailActivity.getOrder().getOrderDetails();
 
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
             checkOrderRecyclerView.setLayoutManager(linearLayoutManager);
@@ -69,6 +62,15 @@ public class CheckOrderFragment extends Fragment {
 
             checkOrderRecyclerView.setHasFixedSize(true); //cardview hanno tutte le stesse dimensioni
 
+            checkOrderRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener(){
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy){
+                    if (dy > 0)
+                        checkOrderButton.hide();
+                    else if (dy < 0)
+                        checkOrderButton.show();
+                }
+            });
 
             adapter.setOnItemClickListener(new CheckOrderRecycleViewAdapter.manageClickOnButtonCard() {
                 @Override
@@ -112,13 +114,11 @@ public class CheckOrderFragment extends Fragment {
                 }
             });
 
-        }else {
-            emptySummary.setText(R.string.emptySummary);
+        }else{
+            manageVisibilityOrderEmpty();
         }
 
-
         checkOrderButton.setOnClickListener(v->{
-            Toast.makeText(getContext(), "ciao", Toast.LENGTH_LONG).show();
             FragmentManager fm = getActivity().getSupportFragmentManager();
             fm.beginTransaction().replace(R.id.FragmentContainer, new ConfirmFragment()).commit();
         });
@@ -128,7 +128,6 @@ public class CheckOrderFragment extends Fragment {
 
 
     private void manageVisibilityOrderEmpty (){
-        emptySummary.setText(R.string.emptySummary);
-        emptySummary.setVisibility(View.VISIBLE);
+        startActivity(new Intent(getContext(), WaiterActivity.class));
     }
 }

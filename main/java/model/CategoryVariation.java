@@ -11,14 +11,6 @@ public class CategoryVariation {
         this.variation = variation;
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public Variation getVariation() {
-        return variation;
-    }
-
     @Override
     public String toString() {
         return "CategoryVariation{" +

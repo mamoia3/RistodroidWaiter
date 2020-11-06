@@ -30,11 +30,6 @@ public class Seat {
         return name;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-
     @Override
     public String toString() {
         return "Seat{" +

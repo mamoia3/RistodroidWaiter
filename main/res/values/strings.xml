@@ -60,6 +60,7 @@
     <string name="search">Search</string>
     <string name="nfc_disabled">NFC disabled on this device. Turn on to proceed</string>
     <string name="nfc_not_supported">NFC is not supported on this device</string>
+    <string name="label_wait_receive_message">Waiting to receive a new order...</string>
 
 
     <!--

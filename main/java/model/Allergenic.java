@@ -1,10 +1,6 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
-
-import com.example.waiter.Utility;
 
 public class Allergenic {
     private int id;
@@ -44,12 +40,4 @@ public class Allergenic {
         return Objects.hash(id);
     }
 
-
-    public static String getAllergenicsToString (List<Allergenic> allergenics) {
-        ArrayList<String> list = new ArrayList<>();
-        for(int i=0; i<allergenics.size(); i++) {
-            list.add(allergenics.get(i).getName());
-        }
-        return Utility.listToStringWithDelimiter(list, ", ");
-    }
 }

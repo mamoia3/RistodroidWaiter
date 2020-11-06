@@ -22,10 +22,6 @@ public class Menu {
         return name;
     }
 
-    public List<Availability> getAvailabilityList() {
-        return availabilityList;
-    }
-
     @Override
     public String toString() {
         return "Menu{" +

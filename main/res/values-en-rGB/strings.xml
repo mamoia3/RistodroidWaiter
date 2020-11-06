@@ -71,5 +71,6 @@
         <item quantity="other"> are not compilated.</item>
     </plurals>
     <string name="app_name">Waiter</string>
+    <string name="label_wait_receive_message">Waiting to receive a new order...</string>
 
 </resources>

@@ -11,14 +11,6 @@ public class VariationDishOrder {
         this.orderDetail = orderDetail;
     }
 
-    public Variation getVariation() {
-        return variation;
-    }
-
-    public OrderDetail getOrderDetail() {
-        return orderDetail;
-    }
-
     @Override
     public String toString() {
         return "VariationOrder{" +

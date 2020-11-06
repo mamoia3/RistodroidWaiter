@@ -1,15 +1,7 @@
 package model;
 
 
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-
-import java.util.ArrayList;
 import java.util.Objects;
-
-import persistence.RistodroidDBSchema;
-import persistence.SqLiteDb;
 
 public class Category {
 
@@ -34,10 +26,6 @@ public class Category {
         return name;
     }
 
-    public byte[] getPhoto() {
-        return photo;
-    }
-
 
     @Override
     public String toString() {
@@ -53,29 +41,6 @@ public class Category {
         if (!(o instanceof Category)) return false;
         Category category = (Category) o;
         return id == category.id;
-    }
-
-    public static ArrayList<Category> getCategories(Context context) {
-        ArrayList<Category> categories = new ArrayList<>();
-        SQLiteDatabase db = new SqLiteDb(context).getReadableDatabase();
-        String[] projection = {
-                RistodroidDBSchema.CategoryTable.Cols.ID,
-                RistodroidDBSchema.CategoryTable.Cols.NAME,
-                RistodroidDBSchema.CategoryTable.Cols.PHOTO
-        };
-
-        Cursor cursor = db.query(RistodroidDBSchema.CategoryTable.NAME, projection, null,
-                null, null, null, null);
-
-        while (cursor.moveToNext()) {
-            int id = cursor.getInt(cursor.getColumnIndex(RistodroidDBSchema.CategoryTable.Cols.ID));
-            String name = cursor.getString(cursor.getColumnIndex(RistodroidDBSchema.CategoryTable.Cols.NAME));
-            byte[] photo = cursor.getBlob(cursor.getColumnIndex(RistodroidDBSchema.CategoryTable.Cols.PHOTO));
-            categories.add(new Category(id, name, photo));
-        }
-
-        cursor.close();
-        return categories;
     }
 
     @Override

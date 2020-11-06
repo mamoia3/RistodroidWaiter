@@ -1,23 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:waiter="http://schemas.android.com/apk/res-auto"
     tools:context=".CheckOrderFragment">
-
-    <TextView
-        android:id="@+id/text_empty_summary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        waiter:layout_constraintBottom_toBottomOf="parent"
-        waiter:layout_constraintEnd_toEndOf="parent"
-        waiter:layout_constraintStart_toStartOf="parent"
-        waiter:layout_constraintTop_toTopOf="@+id/summary_recycler_view" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/summary_recycler_view"
@@ -38,9 +26,9 @@
         android:layout_marginBottom="20dp"
         android:clickable="true"
         android:contentDescription="@string/button_add_dish"
-        android:src="@drawable/check_bold"
+        android:src="@drawable/chevron_right"
         waiter:backgroundTint="@color/accent"
         waiter:layout_constraintBottom_toBottomOf="parent"
         waiter:layout_constraintEnd_toEndOf="parent"
         waiter:tint="@color/icons" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

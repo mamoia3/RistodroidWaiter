@@ -39,15 +39,11 @@ public class WaiterActivity extends AppCompatActivity {
 
     private TextView tvIncomingMessage;
     private NfcAdapter nfcAdapter;
-    private static Order order;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receiver);
-        String url = "https://www.sabersolutions.it/ristodroid/get.php";
-
-        getJsonResponse(url);
 
         if (!isNfcSupported()) {
             Toast.makeText(this, R.string.nfc_not_supported, Toast.LENGTH_SHORT).show();
@@ -67,10 +63,8 @@ public class WaiterActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        FragmentManager fm = getSupportFragmentManager();
-        CheckOrderFragment checkOrderFragment = new CheckOrderFragment();
-        fm.beginTransaction().add(R.id.FragmentContainer, checkOrderFragment).commit();
-        //this.tvIncomingMessage = findViewById(R.id.tv_in_message);
+        this.tvIncomingMessage = findViewById(R.id.tv_in_message);
+        this.tvIncomingMessage.setText(R.string.label_wait_receive_message);
     }
 
     @Override
@@ -107,10 +101,14 @@ public class WaiterActivity extends AppCompatActivity {
             NdefRecord ndefRecord_0 = inNdefRecords[0];
 
             String inMessage = new String(ndefRecord_0.getPayload());
-            Gson gson = new Gson();
-            order = gson.fromJson(inMessage, Order.class);
 
-//            this.tvIncomingMessage.setText(inMessage);
+            if(inMessage.length() > 0){
+                Intent intentListOrder = new Intent(this, ListOrderDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("JSON_ORDER", inMessage);
+                intentListOrder.putExtras(bundle);
+                startActivity(intentListOrder);
+            }
         }
     }
 
@@ -156,54 +154,7 @@ public class WaiterActivity extends AppCompatActivity {
         adapter.enableForegroundDispatch(activity, pendingIntent, filters, techList);
     }
 
-    public static Order getOrder() {
-        return order;
-    }
-
-    public static void setOrder(Order order) {
-        WaiterActivity.order = order;
-    }
-
     public void disableForegroundDispatch(final AppCompatActivity activity, NfcAdapter adapter) {
         adapter.disableForegroundDispatch(activity);
-    }
-
-    /**
-     * Procedura per il caricamento del json nel db
-     * @param url indirizzo per la richiesta GET
-     */
-    private void getJsonResponse(String url) {
-        JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
-            try {
-                JSONObject jsonDb = response.getJSONObject("db");
-                TreeMap<String, JSONArray> tables = getDbTablesFromJson(jsonDb);
-                LoadJson.insertJsonIntoDb(tables, getApplicationContext());
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }, error -> {
-            Toast toast= Toast.makeText(getApplicationContext(),R.string.SyncFailed,Toast.LENGTH_LONG);
-            toast.show();
-        });
-
-        Volley.newRequestQueue(this).add(jsonRequest);
-    }
-
-    /**
-     * Ritorna una mappa chiave (nome tabella) valore (row della rispettiva tabella) del db
-     * @param db database
-     * @return tables
-     * @throws JSONException json exception
-     */
-    private TreeMap<String, JSONArray> getDbTablesFromJson(JSONObject db) throws JSONException {
-        TreeMap<String, JSONArray> tables = new TreeMap<>();
-        JSONArray keys = db.names();
-        for(int i=0; i< db.length(); i++) {
-            if (keys != null) {
-                tables.put(keys.getString(i) ,db.getJSONArray(keys.getString(i)));
-            }
-        }
-        return tables;
     }
 }

@@ -26,20 +26,8 @@ public class OrderDetail {
         this.variationMinusList = new ArrayList<>();
     }
 
-    public void setVariationPlusList(List<Variation> variationPlusList) {
-        this.variationPlusList = variationPlusList;
-    }
-
-    public void setVariationMinusList(List<Variation> variationMinusList) {
-        this.variationMinusList = variationMinusList;
-    }
-
     public String getId() {
         return id;
-    }
-
-    public String getOrder() {
-        return order;
     }
 
     public Dish getDish() {
@@ -82,15 +70,6 @@ public class OrderDetail {
         return Objects.hash(id);
     }
 
-    public static int getTotalQuantity (List<OrderDetail> list){
-        int sum = 0;
-        for(int i =0; i < list.size(); i++){
-            sum = sum + list.get(i).getQuantity();
-        }
-        return sum;
-    }
-
-
     public static double getTotalPriceVariation (OrderDetail detail){
         double total = 0;
         for(int i=0; i<detail.getVariationPlusList().size();i++){
@@ -98,18 +77,4 @@ public class OrderDetail {
         }
         return total;
     }
-
-    public static double getTotalReceipt (List<OrderDetail> list){
-        double total = 0;
-
-        for(int i = 0; i < list.size(); i++){
-
-            double priceItem = list.get(i).quantity * (
-                    list.get(i).getDish().getPrice() + getTotalPriceVariation(list.get(i)));
-
-            total = total + priceItem;
-        }
-        return total;
-    }
-
 }

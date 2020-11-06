@@ -16,22 +16,6 @@ public class Availability {
         this.endDate = endDate;
     }
 
-    public Menu getMenu() {
-        return menu;
-    }
-
-    public Dish getDish() {
-        return dish;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
     @Override
     public String toString() {
         return "Availability{" +

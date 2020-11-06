@@ -14,7 +14,6 @@ import androidx.fragment.app.Fragment;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -24,12 +23,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Dish;
 import model.Order;
-import model.OrderDetail;
 import model.Seat;
 import model.Table;
-import model.Variation;
 
 
 public class ConfirmFragment extends Fragment {
@@ -68,7 +64,7 @@ public class ConfirmFragment extends Fragment {
         return root;
     }
 
-    private void seatSpinner(View root) {
+   private void seatSpinner(View root) {
         seatSpinner = root.findViewById(R.id.seats_spinner);
         List<Seat> seats = Seat.getSeatsFromDb(getContext());
         SeatSpinnerAdapter seatAdapter = new SeatSpinnerAdapter(getContext(), android.R.layout.simple_spinner_item, seats);
@@ -78,13 +74,13 @@ public class ConfirmFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedSeat = seatAdapter.getItem(position);
-                WaiterActivity.getOrder().setSeat(selectedSeat);
+                ListOrderDetailActivity.getOrder().setSeat(selectedSeat);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 selectedSeat = null;
-                WaiterActivity.getOrder().setSeat(null);
+                ListOrderDetailActivity.getOrder().setSeat(null);
             }
         });
     }
@@ -99,13 +95,13 @@ public class ConfirmFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedTable = tablesAdapter.getItem(position);
-                WaiterActivity.getOrder().setTable(selectedTable);
+                ListOrderDetailActivity.getOrder().setTable(selectedTable);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 selectedTable = null;
-                WaiterActivity.getOrder().setTable(null);
+                ListOrderDetailActivity.getOrder().setTable(null);
             }
         });
     }
@@ -116,15 +112,15 @@ public class ConfirmFragment extends Fragment {
         seatsNumber.setMinValue(1);
         seatsNumber.setWrapSelectorWheel(true);
         seatsNumber.setOnValueChangedListener((picker, oldVal, newVal) ->
-                WaiterActivity.getOrder().setSeatNumber(newVal));
+                ListOrderDetailActivity.getOrder().setSeatNumber(newVal));
     }
 
     private void confirm(View root) {
         confirmButton = root.findViewById(R.id.confirm_button);
         confirmButton.setOnClickListener(v -> {
-            boolean isAllSetted = WaiterActivity.getOrder().getSeat() != null &&
-                    WaiterActivity.getOrder().getTable() != null &&
-                    (Integer) WaiterActivity.getOrder().getSeatNumber() != null;
+            boolean isAllSetted = ListOrderDetailActivity.getOrder().getSeat() != null &&
+                    ListOrderDetailActivity.getOrder().getTable() != null &&
+                    (Integer) ListOrderDetailActivity.getOrder().getSeatNumber() != null;
             if (isAllSetted) {
                 String url ="https://www.sabersolutions.it/ristodroid/insertOrder.php";
                 try {
@@ -137,6 +133,7 @@ public class ConfirmFragment extends Fragment {
                 String fields = Utility.listToStringWithDelimiter(unselectedFields, ", ");
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setTitle(R.string.titleConfirmError);
+                builder.setIcon(R.drawable.alert_circle);
                 builder.setMessage(getResources().getQuantityString(
                         R.plurals.numberOfFields, unselectedFields.size()) + " " + fields + " " +
                         getResources().getQuantityString(R.plurals.compilated, unselectedFields.size()));
@@ -151,7 +148,7 @@ public class ConfirmFragment extends Fragment {
     }
 
     private void insertOrderIntoDb(String url) throws JSONException {
-        String order = Order.convertToJson(WaiterActivity.getOrder());
+        String order = Order.convertToJson(ListOrderDetailActivity.getOrder());
         JSONObject jsonOrder = new JSONObject(order);
 
         JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, jsonOrder,
@@ -165,13 +162,13 @@ public class ConfirmFragment extends Fragment {
     private ArrayList<String> checkSelected() {
         ArrayList<String> fields = new ArrayList<>();
 
-        if (WaiterActivity.getOrder().getSeat() == null) {
+        if (ListOrderDetailActivity.getOrder().getSeat() == null) {
             fields.add(getResources().getString(R.string.seatType));
         }
-        if (WaiterActivity.getOrder().getTable() == null) {
+        if (ListOrderDetailActivity.getOrder().getTable() == null) {
             fields.add(getResources().getString(R.string.tableNumber));
         }
-        if ((Integer) WaiterActivity.getOrder().getSeatNumber() == null) {
+        if ((Integer) ListOrderDetailActivity.getOrder().getSeatNumber() == null) {
             fields.add(getResources().getString(R.string.seatNumber));
         }
         return fields;

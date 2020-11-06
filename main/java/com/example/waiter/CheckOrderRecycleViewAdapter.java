@@ -52,7 +52,7 @@ public class CheckOrderRecycleViewAdapter extends RecyclerView.Adapter<RecyclerV
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        final OrderDetail detail = orderDetailsList.get(position);
+       final OrderDetail detail = orderDetailsList.get(position);
         String euro = Currency.getInstance(Locale.GERMANY).getSymbol() + " ";
         String quantity = detail.getQuantity() + " " + Utility.convertResourceIdToString(R.string.piece,context);
         String total = euro + Utility.priceToString(detail.getQuantity() * (detail.getDish().getPrice() + OrderDetail.getTotalPriceVariation(detail)));
@@ -76,7 +76,6 @@ public class CheckOrderRecycleViewAdapter extends RecyclerView.Adapter<RecyclerV
         ((ViewHolder) holder).textDishTitle.setText(detail.getDish().getName());
         ((ViewHolder) holder).textQuantity.setText(quantity);
         ((ViewHolder) holder).textPrice.setText(total);
-        ((ViewHolder) holder).dishImage.setImageBitmap(Utility.byteToBitmap(detail.getDish().getPhoto()));
 
         ((CheckOrderRecycleViewAdapter.ViewHolder) holder).buttonAddQuantity.setOnClickListener(v -> {
             if(position != RecyclerView.NO_POSITION){
@@ -116,7 +115,7 @@ public class CheckOrderRecycleViewAdapter extends RecyclerView.Adapter<RecyclerV
             alertDialog.show();
         });
 
-        if (WaiterActivity.getOrder().isConfirmed()){
+        if (ListOrderDetailActivity.getOrder().isConfirmed()){
             ((ViewHolder) holder).buttonAddQuantity.setBackground(ContextCompat.getDrawable(context, R.drawable.plus_box_grey));
             ((ViewHolder) holder).buttonRemoveQuantity.setBackground(ContextCompat.getDrawable(context, R.drawable.minus_box_outline_grey));
             ((ViewHolder) holder).buttonDeleteDish.setBackground(ContextCompat.getDrawable(context, R.drawable.delete_grey));
@@ -146,7 +145,6 @@ public class CheckOrderRecycleViewAdapter extends RecyclerView.Adapter<RecyclerV
         private final TextView textMinusVariation;
         private final TextView textQuantity;
         private final TextView textPrice;
-        private final ImageView dishImage;
         private final Button buttonAddQuantity;
         private final Button buttonRemoveQuantity;
         private final Button buttonDeleteDish;
@@ -159,7 +157,6 @@ public class CheckOrderRecycleViewAdapter extends RecyclerView.Adapter<RecyclerV
             textMinusVariation = itemView.findViewById(R.id.summary_text_minus_variations);
             textQuantity = itemView.findViewById(R.id.summary_text_quantity_summary);
             textPrice = itemView.findViewById(R.id.summary_text_dish_price);
-            dishImage = itemView.findViewById(R.id.summary_image_dish);
             buttonAddQuantity = itemView.findViewById(R.id.summary_btn_add_quantity);
             buttonRemoveQuantity = itemView.findViewById(R.id.summary_btn_remove_quantity);
             buttonDeleteDish = itemView.findViewById(R.id.summary_btn_delete_dish);

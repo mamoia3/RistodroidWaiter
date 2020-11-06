@@ -13,20 +13,15 @@ import persistence.SqLiteDb;
 
 public class Table {
     private String id;
-    private List<Order> orderList;
 
-    public Table(String id, List<Order> orderList) {
+    public Table(String id) {
         this.id = id;
-        this.orderList = orderList;
     }
 
     public String getId() {
         return id;
     }
 
-    public List<Order> getOrderList() {
-        return orderList;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -53,8 +48,8 @@ public class Table {
                 null, null, null, null);
 
         while (cursor.moveToNext()) {
-            String id = cursor.getString(cursor.getColumnIndex(RistodroidDBSchema.CategoryTable.Cols.ID));
-            tables.add(new Table(id, null));
+            String id = cursor.getString(cursor.getColumnIndex(RistodroidDBSchema.TableTable.Cols.ID));
+            tables.add(new Table(id));
         }
 
         cursor.close();

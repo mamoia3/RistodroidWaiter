@@ -34,9 +34,6 @@ public class Order implements Parcelable {
         this.orderDetails = new ArrayList<>();
     }
 
-    public void setOrderDetails(List<OrderDetail> orderDetails) {
-        this.orderDetails = orderDetails;
-    }
 
     protected Order(Parcel in) {
         id = in.readString();
@@ -83,10 +80,6 @@ public class Order implements Parcelable {
         this.seatNumber = seatNumber;
     }
 
-    public String getTime() {
-        return time;
-    }
-
     public Table getTable() {
         return table;
     }
@@ -101,10 +94,6 @@ public class Order implements Parcelable {
 
     public List<OrderDetail> getOrderDetails() {
         return orderDetails;
-    }
-
-    public void addOrderDetail (OrderDetail o) {
-        orderDetails.add(o);
     }
 
     @Override
