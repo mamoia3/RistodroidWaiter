@@ -49,7 +49,8 @@
     <string name="seatNumber">number of seats</string>
     <string name="seatType">type of seat</string>
     <string name="tableNumber">number of table</string>
-
+    <string name="sendOrderToDbFailed">Error! Unable to send order to server.</string>
+    <string name="sendOrderToDbSuccess">Order sent correctly!</string>
 
     <!-- SEZIONE NFC  -->
 
@@ -60,7 +61,7 @@
     <string name="search">Search</string>
     <string name="nfc_disabled">NFC disabled on this device. Turn on to proceed</string>
     <string name="nfc_not_supported">NFC is not supported on this device</string>
-    <string name="label_wait_receive_message">Waiting to receive a new order...</string>
+    <string name="label_wait_receive_message">Waiting to receive a new order…</string>
 
 
     <!--

@@ -74,5 +74,7 @@
     </plurals>
     <string name="app_name">Cameriere</string>
     <string name="label_wait_receive_message">In attesa di ricevere un nuovo ordine...</string>
+    <string name="sendOrderToDbFailed">Errore! Impossibile inviare l\'ordine al server.</string>
+    <string name="sendOrderToDbSuccess">Ordine inviato correttamente!</string>
 
 </resources>

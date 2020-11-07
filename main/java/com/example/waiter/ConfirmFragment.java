@@ -152,8 +152,8 @@ public class ConfirmFragment extends Fragment {
         JSONObject jsonOrder = new JSONObject(order);
 
         JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, jsonOrder,
-                response -> Toast.makeText(getContext(),R.string.confirm,Toast.LENGTH_LONG).show(),
-                error -> Toast.makeText(getContext(),R.string.messageFailedConnectionDB,Toast.LENGTH_LONG).show());
+                response -> Toast.makeText(getContext(),R.string.sendOrderToDbSuccess,Toast.LENGTH_LONG).show(),
+                error -> Toast.makeText(getContext(),R.string.sendOrderToDbFailed,Toast.LENGTH_LONG).show());
 
         Volley.newRequestQueue(getContext()).add(jsonRequest);
     }

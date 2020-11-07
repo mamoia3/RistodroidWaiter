@@ -72,5 +72,7 @@
     </plurals>
     <string name="app_name">Waiter</string>
     <string name="label_wait_receive_message">Waiting to receive a new order...</string>
+    <string name="sendOrderToDbFailed">Error! Unable to send order to server.</string>
+    <string name="sendOrderToDbSuccess">Order sent correctly!</string>
 
 </resources>
