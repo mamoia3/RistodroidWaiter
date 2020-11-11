@@ -20,6 +20,7 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.victor.loading.rotate.RotateLoading;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,11 +40,15 @@ public class WaiterActivity extends AppCompatActivity {
 
     private TextView tvIncomingMessage;
     private NfcAdapter nfcAdapter;
+    private RotateLoading loading;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receiver);
+
+        loading = findViewById(R.id.rotateloading);
+        loading.start();
 
         if (!isNfcSupported()) {
             Toast.makeText(this, R.string.nfc_not_supported, Toast.LENGTH_SHORT).show();
@@ -51,6 +56,7 @@ public class WaiterActivity extends AppCompatActivity {
         }
         if (!nfcAdapter.isEnabled()) {
             Toast.makeText(this, R.string.nfc_disabled, Toast.LENGTH_SHORT).show();
+            return;
         }
 
         initViews();

@@ -1,6 +1,7 @@
 package com.example.waiter;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -111,8 +112,7 @@ public class ConfirmFragment extends Fragment {
         seatsNumber.setMaxValue(50);
         seatsNumber.setMinValue(1);
         seatsNumber.setWrapSelectorWheel(true);
-        seatsNumber.setOnValueChangedListener((picker, oldVal, newVal) ->
-                ListOrderDetailActivity.getOrder().setSeatNumber(newVal));
+        ListOrderDetailActivity.getOrder().setSeatNumber(seatsNumber.getValue());
     }
 
     private void confirm(View root) {
@@ -152,7 +152,10 @@ public class ConfirmFragment extends Fragment {
         JSONObject jsonOrder = new JSONObject(order);
 
         JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, jsonOrder,
-                response -> Toast.makeText(getContext(),R.string.sendOrderToDbSuccess,Toast.LENGTH_LONG).show(),
+                response -> {
+                    Toast.makeText(getContext(),R.string.sendOrderToDbSuccess,Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(getContext(), WaiterActivity.class));
+                },
                 error -> Toast.makeText(getContext(),R.string.sendOrderToDbFailed,Toast.LENGTH_LONG).show());
 
         Volley.newRequestQueue(getContext()).add(jsonRequest);
