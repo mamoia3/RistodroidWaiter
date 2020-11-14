@@ -62,7 +62,10 @@
     <string name="nfc_disabled">NFC disabled on this device. Turn on to proceed</string>
     <string name="nfc_not_supported">NFC is not supported on this device</string>
     <string name="label_wait_receive_message">Waiting to receive a new order…</string>
-    <string name="nfcDisableTextView" >Enable NFC to receive order!</string>
+    <string name="enableNFCRequestTitle">Enable NFC</string>
+    <string name="enableNFCRequestContent">NFC not enable! Turn on NFC to use this app.</string>
+    <string name="Close">Close</string>
+    <string name="TurnOn">Turn On</string>
 
 
     <!--

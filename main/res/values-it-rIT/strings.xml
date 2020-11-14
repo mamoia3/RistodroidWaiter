@@ -76,6 +76,9 @@
     <string name="label_wait_receive_message">In attesa di ricevere un nuovo ordine...</string>
     <string name="sendOrderToDbFailed">Errore! Impossibile inviare l\'ordine al server.</string>
     <string name="sendOrderToDbSuccess">Ordine inviato correttamente!</string>
-    <string name="nfcDisableTextView" >Attiva l\'NFC per ricevere un ordine!</string>
+    <string name="enableNFCRequestTitle">Abilita NFC</string>
+    <string name="enableNFCRequestContent">NFC non attivo! Attiva NFC per usare questa applicazione.</string>
+    <string name="Close">Chiudi</string>
+    <string name="TurnOn">Attiva</string>
 
 </resources>

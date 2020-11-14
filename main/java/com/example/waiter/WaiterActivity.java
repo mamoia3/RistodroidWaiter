@@ -1,13 +1,18 @@
 package com.example.waiter;
 
+import android.app.AlertDialog;
 import android.app.PendingIntent;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.provider.Settings;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,19 +52,31 @@ public class WaiterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receiver);
 
-        loading = findViewById(R.id.rotateloading);
-        loading.start();
+
 
         if (!isNfcSupported()) {
             Toast.makeText(this, R.string.nfc_not_supported, Toast.LENGTH_SHORT).show();
             finish();
         }
-        if (!nfcAdapter.isEnabled()) {
-            Toast.makeText(this, R.string.nfc_disabled, Toast.LENGTH_SHORT).show();
-            return;
-        }
 
-        initViews();
+        if (!nfcAdapter.isEnabled()) {
+            //Toast.makeText(this, R.string.nfc_disabled, Toast.LENGTH_SHORT).show();
+            //return;
+
+            AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
+            alertbox.setTitle(R.string.enableNFCRequestTitle);
+            alertbox.setMessage(getString(R.string.enableNFCRequestContent));
+            alertbox.setPositiveButton(R.string.TurnOn, (dialog, which) -> {
+                Intent intent;
+                intent = new Intent(Settings.ACTION_NFC_SETTINGS);
+                startActivity(intent);
+                initViews();
+            });
+            alertbox.setNegativeButton(R.string.Close, (dialog, which) -> {
+                finish();
+            });
+            alertbox.show();
+        }
     }
 
     // need to check NfcAdapter for nullability. Null means no NFC support on the device
@@ -69,7 +86,11 @@ public class WaiterActivity extends AppCompatActivity {
     }
 
     private void initViews() {
+        loading = findViewById(R.id.rotateloading);
+        loading.setVisibility(View.VISIBLE);
+        loading.start();
         this.tvIncomingMessage = findViewById(R.id.tv_in_message);
+        this.tvIncomingMessage.setVisibility(View.VISIBLE);
         this.tvIncomingMessage.setText(R.string.label_wait_receive_message);
     }
 
