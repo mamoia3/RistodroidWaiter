@@ -53,12 +53,8 @@ public class WaiterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_receiver);
 
         if (!isNfcSupported()) {
-            AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
-            alertbox.setTitle(R.string.nfc_not_supported);
-            alertbox.setIcon(R.drawable.alert_circle);
-            alertbox.setPositiveButton(R.string.ok, (dialog, which) -> {
-                finish();
-            });
+            Toast.makeText(this,R.string.nfc_not_supported, Toast.LENGTH_LONG).show();
+            finish();
         }
     }
 
