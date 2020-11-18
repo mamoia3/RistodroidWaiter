@@ -52,30 +52,34 @@ public class WaiterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receiver);
 
-
-
         if (!isNfcSupported()) {
-            Toast.makeText(this, R.string.nfc_not_supported, Toast.LENGTH_SHORT).show();
-            finish();
+            AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
+            alertbox.setTitle(R.string.nfc_not_supported);
+            alertbox.setIcon(R.drawable.alert_circle);
+            alertbox.setPositiveButton(R.string.ok, (dialog, which) -> {
+                finish();
+            });
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
 
         if (!nfcAdapter.isEnabled()) {
-            //Toast.makeText(this, R.string.nfc_disabled, Toast.LENGTH_SHORT).show();
-            //return;
 
             AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
             alertbox.setTitle(R.string.enableNFCRequestTitle);
             alertbox.setMessage(getString(R.string.enableNFCRequestContent));
             alertbox.setPositiveButton(R.string.TurnOn, (dialog, which) -> {
-                Intent intent;
-                intent = new Intent(Settings.ACTION_NFC_SETTINGS);
-                startActivity(intent);
-                initViews();
+                startActivity(new Intent(Settings.ACTION_NFC_SETTINGS));
             });
             alertbox.setNegativeButton(R.string.Close, (dialog, which) -> {
                 finish();
             });
             alertbox.show();
+        }else{
+            initViews();
         }
     }
 

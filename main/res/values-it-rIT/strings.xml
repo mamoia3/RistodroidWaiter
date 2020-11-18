@@ -46,7 +46,7 @@
     <string name="label_your_message">Messaggio NFC in uscita</string>
     <string name="title_btn_set">Imposta Messaggio</string>
     <string name="nfc_disabled">NFC disabilitato su questo dispositivo. Abilitalo per continuare.</string>
-    <string name="nfc_not_supported">NFC non è supportato su questo dispositivo</string>
+    <string name="nfc_not_supported">NFC non è supportato su questo dispositivo. Non puoi utilizzare questa applicazione!</string>
     <string name="titleConfirmError">Errore!</string>
     <string name="seatNumber">numero di coperti</string>
     <string name="seatType">tipo di coperto</string>
