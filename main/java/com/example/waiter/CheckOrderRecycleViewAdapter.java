@@ -116,20 +116,14 @@ public class CheckOrderRecycleViewAdapter extends RecyclerView.Adapter<RecyclerV
         });
 
         if (ListOrderDetailActivity.getOrder().isConfirmed()){
-            ((ViewHolder) holder).buttonAddQuantity.setBackground(ContextCompat.getDrawable(context, R.drawable.plus_box_grey));
-            ((ViewHolder) holder).buttonRemoveQuantity.setBackground(ContextCompat.getDrawable(context, R.drawable.minus_box_outline_grey));
-            ((ViewHolder) holder).buttonDeleteDish.setBackground(ContextCompat.getDrawable(context, R.drawable.delete_grey));
-            ((ViewHolder) holder).buttonAddQuantity.setClickable(false);
-            ((ViewHolder) holder).buttonRemoveQuantity.setClickable(false);
-            ((ViewHolder) holder).buttonDeleteDish.setClickable(false);
+            ((ViewHolder) holder).buttonAddQuantity.setVisibility(View.INVISIBLE);
+            ((ViewHolder) holder).buttonRemoveQuantity.setVisibility(View.INVISIBLE);
+            ((ViewHolder) holder).buttonDeleteDish.setVisibility(View.INVISIBLE);
 
         }else{
-            ((ViewHolder) holder).buttonAddQuantity.setBackground(ContextCompat.getDrawable(context, R.drawable.plus_box));
-            ((ViewHolder) holder).buttonRemoveQuantity.setBackground(ContextCompat.getDrawable(context, R.drawable.minus_box_outline));
-            ((ViewHolder) holder).buttonDeleteDish.setBackground(ContextCompat.getDrawable(context, R.drawable.delete));
-            ((ViewHolder) holder).buttonAddQuantity.setClickable(true);
-            ((ViewHolder) holder).buttonRemoveQuantity.setClickable(true);
-            ((ViewHolder) holder).buttonDeleteDish.setClickable(true);
+            ((ViewHolder) holder).buttonAddQuantity.setVisibility(View.VISIBLE);
+            ((ViewHolder) holder).buttonRemoveQuantity.setVisibility(View.VISIBLE);
+            ((ViewHolder) holder).buttonDeleteDish.setVisibility(View.VISIBLE);
         }
     }
 
